@@ -1,50 +1,51 @@
 # MySQL Interview Coding
 
-A growing collection of SQL exercises for practicing common MySQL interview queries. Each exercise includes a short prompt in a SQL comment followed by a query solution, making the files useful for revision and hands-on practice.
+A collection of MySQL practice queries for interview preparation. Each exercise file pairs SQL prompts in comments with example solutions. The repository also includes a synthetic e-commerce dataset so you can run the queries locally.
 
-## Current Topics
+## Practice Files
 
-[`Basic Select Queries.sql`](Basic%20Select%20Queries.sql) contains 20 exercises covering:
+| File | Topics |
+| --- | --- |
+| [`Basic Select Queries.sql`](Basic%20Select%20Queries.sql) | Selecting columns, filtering, sorting, limits, grouping, and pattern matching |
+| [`Level-2_Queries.sql`](Level-2_Queries.sql) | Aggregate functions (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`) and `GROUP BY` |
+| [`mysql_interview_sales_dataset.sql`](mysql_interview_sales_dataset.sql) | Database and table setup plus 10,000 synthetic sales records |
 
-- Selecting columns and distinct values
-- Filtering rows with conditions, ranges, and `NULL` checks
-- Sorting and limiting results
-- Grouping and counting records
-- Pattern matching with `LIKE`
-
-## Requirements
-
-- MySQL Server and a command-line client or SQL editor
-- A database named `interview_practice`
-- A `sales_data` table with the columns used in the exercise file, including customer, product, order, payment, age, discount, and rating fields
-
-This repository currently provides the exercise queries, not a database dump or sample dataset. Create or load compatible practice data before running the scripts.
+The dataset uses the `interview_practice` database and creates the `sales_data` table with order, customer, product, payment, shipping, and rating fields. It is designed for MySQL 8.0 or later.
 
 ## Getting Started
 
-Clone the repository, connect to MySQL, and run the script from the repository directory:
+Install or connect to MySQL 8.0+, then run the dataset script from the repository directory:
 
 ```sh
-git clone <repository-url>
-cd MySQL_Interview_Coding
-mysql -u <user> -p < "Basic Select Queries.sql"
+mysql -u your_user -p < mysql_interview_sales_dataset.sql
 ```
 
-The script selects the `interview_practice` database with `USE interview_practice;`. Ensure it exists and contains the expected table first. You can also open the `.sql` file in a MySQL-compatible editor and run individual queries.
+This creates `interview_practice`, creates `sales_data`, loads the sample rows, and runs a row-count check. **The setup script drops and recreates `interview_practice.sales_data` if it already exists. Back up any data you need before running it.**
+
+After setup, run either exercise file:
+
+```sh
+mysql -u your_user -p < "Basic Select Queries.sql"
+mysql -u your_user -p < Level-2_Queries.sql
+```
+
+You can also open the `.sql` files in a MySQL-compatible editor and run individual queries. Both exercise files expect `interview_practice.sales_data` to exist.
 
 ## How to Practice
 
-Read each numbered prompt, try writing the query yourself, then compare it with the solution. Run queries against sample data and inspect the results, especially for grouped records, sorting ties, and missing values.
+Try each prompt before reading its query, then run the solution and inspect the result. Experiment with `NULL` values, duplicate groups, and tied sort values to understand how MySQL handles them.
 
 ## Repository Layout
 
 ```text
 .
-├── Basic Select Queries.sql  # Numbered SELECT and filtering exercises
-├── AGENTS.md                 # Contributor guidance
+├── Basic Select Queries.sql          # Foundational SELECT practice
+├── Level-2_Queries.sql               # Aggregation and grouping practice
+├── mysql_interview_sales_dataset.sql # Synthetic schema and sample data
+├── AGENTS.md                         # Contributor guidance
 └── README.md
 ```
 
 ## Contributing
 
-Contributions that add exercises, clarify prompts, or improve query correctness are welcome. Keep exercises numbered and grouped by topic, use clear comments, and note any schema assumptions. See [AGENTS.md](AGENTS.md) for repository conventions.
+Add exercises in clearly named `.sql` files, group prompts by topic, and document schema assumptions. Use synthetic practice data only; do not include credentials or private database exports. See [AGENTS.md](AGENTS.md) for repository conventions.
