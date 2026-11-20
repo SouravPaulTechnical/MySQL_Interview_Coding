@@ -51,6 +51,23 @@ SELECT payment_method, COUNT(order_id) AS number_of_orders FROM sales_data GROUP
 -- 12. Find the average customer rating for each product category.
 SELECT category, AVG(rating) AS customer_rating FROM sales_data GROUP BY category;
 
+-- Section C – HAVING clause
+-- Focus: Filtering grouped results.
+
+-- 13. Find customers who have placed more than 5 orders.
+SELECT customer_name, COUNT(order_status) as total_order FROM sales_data GROUP BY customer_name HAVING total_order>5 ORDER BY customer_name;
+
+-- 14. Find product categories where total revenue is greater than ₹5,00,000.
+SELECT category , sum(quantity * unit_price *(100-discount_percent)/100) as total_revenue FROM sales_data GROUP BY category HAVING total_revenue>500000 ORDER BY category ASC;
+
+-- 15. Find cities having more than 100 orders.
+SELECT city, COUNT(order_status) as total_order FROM sales_data GROUP BY city having total_order>100 ORDER BY city ASC;
+
+-- 16. Find products whose total quantity sold is greater than 50.
+
+
+-- 17. Find payment methods used for more than 500 orders.
+
 
 
 
